@@ -12,7 +12,7 @@ spec:
   targetNamespace: hmc-system
   interval: 10m
   values:
-    flux2:
+    cert-manager:
       enabled: false
   install:
     crds: Create
