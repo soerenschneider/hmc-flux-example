@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m0s
-  path: clusters/kind/infra
+  path: management-clusters/kind/infra
   prune: true
   sourceRef:
     kind: GitRepository
@@ -19,7 +19,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m0s
-  path: clusters/kind/hmc
+  path: management-clusters/kind/hmc
   prune: true
   sourceRef:
     kind: GitRepository
