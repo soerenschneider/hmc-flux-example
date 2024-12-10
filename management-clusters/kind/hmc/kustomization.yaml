@@ -1,0 +1,17 @@
+---
+apiVersion: "kustomize.config.k8s.io/v1beta1"
+kind: "Kustomization"
+namespace: hmc-system
+resources:
+  - ../../../apps/2a/aws
+patches:
+  - target:
+      kind: ManagedCluster
+      name: managed-standalone-cluster
+    patch: |-
+      - op: replace
+        path: /spec/config/workersNumber
+        value: 3
+      - op: replace
+        path: /spec/config/worker/instanceType
+        value: t3.medium
