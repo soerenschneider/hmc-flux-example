@@ -8,4 +8,4 @@ spec:
   interval: 1m0s
   ref:
     branch: main
-  url: https://github.com/soerenschneider/hmc-test.git
+  url: https://github.com/soerenschneider/hmc-flux-example.git
