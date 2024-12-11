@@ -11,9 +11,6 @@ spec:
     namespace: default
   targetNamespace: hmc-system
   interval: 10m
-  values:
-    cert-manager:
-      enabled: false
   install:
     crds: Create
     remediation:
