@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    hmc.mirantis.com/managed: "true"
+  name: cluster-api-provider-azure
+  namespace: hmc-system
+spec:
+  chartRef:
+    kind: HelmChart
+    name: cluster-api-provider-azure-0-0-3
+    namespace: hmc-system
+  dependsOn:
+  - name: capi
+  install: {}
+  interval: 10m0s
+  releaseName: cluster-api-provider-azure

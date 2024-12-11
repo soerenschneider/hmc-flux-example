@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  labels:
+    hmc.mirantis.com/managed: "true"
+  name: projectsveltos
+  namespace: hmc-system
+spec:
+  chartRef:
+    kind: HelmChart
+    name: projectsveltos-0-42-0
+    namespace: hmc-system
+  dependsOn:
+  - name: capi
+  install:
+    createNamespace: true
+  interval: 10m0s
+  releaseName: projectsveltos
+  targetNamespace: projectsveltos
