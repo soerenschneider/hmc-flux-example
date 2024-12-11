@@ -14,10 +14,12 @@ Install hmc using flux2
 │   ├── flux-system
 │   ├── hmc-system
 │   └── sealed-secrets
-└── management-clusters         # clusters managed by flux
-    └── kind                    # local test cluster provided by "kind"
-        ├── hmc
-        └── infra
+├── management-clusters         # clusters managed by flux
+│   └── kind              # local test cluster provided by "kind"
+│       ├── hmc
+│       └── infra
+└── terraform                   # create users and access keys for cloud platforms, store as kubernetes secrets
+    └── aws
 ```
 
 ### Kustomize manifests
