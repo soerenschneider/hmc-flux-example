@@ -10,8 +10,6 @@ spec:
     kind: HelmChart
     name: cluster-api-0-0-3
     namespace: hmc-system
-  dependsOn:
-    - name: hmc
   install: {}
   interval: 10m0s
   releaseName: capi
