@@ -11,7 +11,7 @@ spec:
     name: projectsveltos-0-42-0
     namespace: hmc-system
   dependsOn:
-  - name: capi
+    - name: capi
   install:
     createNamespace: true
   interval: 10m0s
