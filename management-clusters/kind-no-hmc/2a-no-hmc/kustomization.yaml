@@ -4,6 +4,7 @@ kind: "Kustomization"
 namespace: hmc-system
 resources:
   - namespace.yaml
+  - helmrepo.yaml
   - ../../../apps/capi
   - ../../../apps/k0smotron
   - ../../../apps/projectsveltos
