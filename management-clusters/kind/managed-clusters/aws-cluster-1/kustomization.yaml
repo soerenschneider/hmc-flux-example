@@ -4,8 +4,6 @@ kind: "Kustomization"
 namespace: hmc-system
 resources:
   - ../../../../managed-clusters/aws
-  - credential.yaml
-  - static-identity.yaml
 patches:
   - target:
       kind: ManagedCluster
