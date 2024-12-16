@@ -7,3 +7,10 @@ resources:
   - helmrepo.yaml
   - helmrelease.yaml
   - networkpolicy.yaml
+patches:
+  - target:
+      kind: NetworkPolicy
+    patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: flux-system
