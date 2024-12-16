@@ -11,6 +11,9 @@ spec:
     namespace: hmc-system
   targetNamespace: hmc-system
   interval: 10m
+  values:
+    flux2:
+      enabled: false
   install:
     crds: Create
     remediation:
