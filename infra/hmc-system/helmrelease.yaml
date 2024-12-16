@@ -8,7 +8,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: hmc
-    namespace: hmc-system
+    namespace: default
   targetNamespace: hmc-system
   interval: 10m
   values:
