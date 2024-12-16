@@ -5,7 +5,7 @@ metadata:
   name: hmc
 spec:
   chartRef:
-    kind: OCIRepository
+    kind: HelmRepository
     name: hmc-templates
     namespace: default
   targetNamespace: hmc-system
