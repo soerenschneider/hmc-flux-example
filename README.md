@@ -101,20 +101,21 @@ hmc-system   soeren-cluster-1   True    ManagedCluster is ready
 ```
 
 ```bash
-$ aws ec2 --region=us-east-1 describe-instances --query "Reservations[].Instances[].[InstanceId, Tags[?Key=='Name'].Value | [0]]" --output table
+$ aws ec2 --region=us-east-1 describe-instances --query "Reservations[].Instances[].[InstanceId, Tags[?Key=='Name'].Value | [0]]" --filters "Name=tag:Name,Values=soeren-cluster-*" --output table
 
 ------------------------------------------------------------
 |                     DescribeInstances                    |
 +----------------------+-----------------------------------+
-|  i-06eb65c769ab1ef34 |  MyLab-DND-sugesh                 |
 |  i-057cf18ab40f850fa |  soeren-cluster-1-cp-0            |
 |  i-00047d395a1849e73 |  soeren-cluster-1-md-2crx2-7x2q4  |
+|  i-0184962fe4854af54 |  soeren-cluster-2-md-9rkqm-tmdrt  |
+|  i-06e4f4e6b48a1841c |  soeren-cluster-2-cp-2            |
+|  i-0755fe63ec1664691 |  soeren-cluster-2-md-9rkqm-6v2gd  |
 |  i-0125cb216f707c5de |  soeren-cluster-1-md-2crx2-4z564  |
 |  i-0def1ec28e2388995 |  soeren-cluster-1-md-2crx2-gxfgt  |
-|  i-0fb6ce5451b2ff3fc |  kenvue-test                      |
-|  i-006522a5aed529f15 |  kenvue-test                      |
-|  i-028e5d13ca25aa0f1 |  kenvue-test                      |
 |  i-0f571da657c671ad9 |  soeren-cluster-1-cp-1            |
+|  i-089c452815a83b5af |  soeren-cluster-2-cp-1            |
+|  i-0f861cb16f9d6ff1c |  soeren-cluster-2-cp-0            |
 |  i-07f99b8f2f85b5925 |  soeren-cluster-1-cp-2            |
 +----------------------+-----------------------------------+
 
