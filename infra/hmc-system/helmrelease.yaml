@@ -7,7 +7,6 @@ spec:
   chartRef:
     kind: HelmRepository
     name: hmc-templates
-    namespace: default
   targetNamespace: hmc-system
   interval: 10m
   install:
