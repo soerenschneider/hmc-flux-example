@@ -5,8 +5,8 @@ metadata:
   name: hmc
 spec:
   chartRef:
-    kind: HelmRepository
-    name: hmc-templates
+    kind: OCIRepository
+    name: hmc
   targetNamespace: hmc-system
   interval: 10m
   install:

@@ -1,12 +1,10 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
 metadata:
-  labels:
-    hmc.mirantis.com/managed: "true"
-  name: hmc-templates
+  name: hmc
 spec:
-  interval: 10m0s
-  provider: generic
-  type: oci
-  url: oci://ghcr.io/mirantis/hmc/charts
+  interval: 5m0s
+  url: oci://ghcr.io/mirantis/hmc/charts/hmc
+  ref:
+    tag: 0.0.4
