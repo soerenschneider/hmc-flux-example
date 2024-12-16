@@ -13,7 +13,7 @@ spec:
   interval: 10m
   values:
     flux2:
-      enabled: true
+      enabled: false
   install:
     crds: Create
     remediation:
