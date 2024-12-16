@@ -27,7 +27,7 @@ Before checking out the kustomize manifests, [this FAQ entry](https://fluxcd.io/
 
 The example kind cluster defines two `kustomize.toolkit.fluxcd.io/v1` [manifests](management-clusters/kind/flux-kustomization.yaml), one to install infra components including CRDs and one to install everything else.
 
-Define `kustomization.kustomize.config.k8s.io` manifests in the appropriate `management-clusters` to patch kustomize bases. An example that patches a `ManagedCluster` resource is found [here](management-clusters/kind/hmc/kustomization.yaml).
+Define `kustomization.kustomize.config.k8s.io` manifests in the appropriate `management-clusters` to patch kustomize bases. An example that patches a `ManagedCluster` resource is found [here](management-clusters/kind/managed-clusters/aws-cluster-1/kustomization.yaml).
 
 ## Bootstrapping flux
 
