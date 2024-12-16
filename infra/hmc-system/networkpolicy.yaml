@@ -12,7 +12,7 @@ spec:
               product.mirantis.com: hmc
           podSelector:
             matchLabels:
-              app.kubernetes.io/instance: hmc
+              app.kubernetes.io/name: hmc
       ports:
         - port: http
   podSelector:
