@@ -29,29 +29,44 @@ The example kind cluster defines two `kustomize.toolkit.fluxcd.io/v1` [manifests
 
 Define `kustomization.kustomize.config.k8s.io` manifests in the appropriate `management-clusters` to patch kustomize bases. An example that patches a `ManagedCluster` resource is found [here](management-clusters/kind/managed-clusters/aws-cluster-1/kustomization.yaml).
 
-## Bootstrapping flux
+## Getting started
 
-A local management cluster can be spun up using only two requirements, [kind](https://kind.sigs.k8s.io/) and a recent version of [kubectl](https://kubernetes.io/docs/reference/kubectl/).
+### Gain Access to a Kubernetes cluster
 
+Either you use an already existing cluster or you can spin up a local management cluster using [kind](https://kind.sigs.k8s.io/).
+
+In case of no existing cluster or as a local dev environment, you can use kind:
 ```
 # Spin up testcluster using "kind"
 $ kind create cluster
-
-# CRDs of flux are not available in the first run
-$ kubectl apply -k management-clusters/kind; kubectl apply -k management-clusters/kind
-
-# Watch manifests are being applied
-$ kubectl get pods -Aw
 ```
 
+### Install initial flux manifests
+
+```
+# CRDs of flux are not available in the first run, therefore we apply it twice
+$ kubectl apply -k management-clusters/kind; kubectl apply -k management-clusters/kind
+
+# Give flux some time and the status of the kustomization
+$ k get kustomizations.kustomize.toolkit.fluxcd.io -A
+NAMESPACE     NAME           AGE    READY   STATUS
+flux-system   clusters-aws   12m    True    Applied revision: main@sha1:9b569c93bb5cd410eb8ca2999aabb0868091a629
+flux-system   credentials    12m    True    Applied revision: main@sha1:9b569c93bb5cd410eb8ca2999aabb0868091a629
+flux-system   infra          12m    True    Applied revision: main@sha1:9b569c93bb5cd410eb8ca2999aabb0868091a629
+```
+
+### Create AWS resources
+
+IAM credentials are needed to provision resources using CAPA. 
+
+This repo contains [terraform code and instructions](terraform/aws/README.md) that creates a user, IAM credentials and a Kubernetes secret that allow creating AWS resources.
+
+### Verifying HMC status
 After some time has passed, the state of the cluster should look like this:
 
 ```
 $ kubectl get pods -A
 NAMESPACE            NAME                                                          READY   STATUS      RESTARTS        AGE
-cert-manager         cert-manager-b6fd485d9-65qjd                                  1/1     Running     0               8m13s
-cert-manager         cert-manager-cainjector-dcc5966bc-jkhtk                       1/1     Running     0               8m13s
-cert-manager         cert-manager-webhook-dfb76c7bd-c8krs                          1/1     Running     0               8m13s
 flux-system          helm-controller-7f788c795c-6dqkh                              1/1     Running     0               8m45s
 flux-system          kustomize-controller-b4f45fff6-c4wk4                          1/1     Running     0               8m45s
 flux-system          notification-controller-556b8867f8-wf7pb                      1/1     Running     0               8m45s
@@ -94,12 +109,14 @@ projectsveltos       sveltos-agent-manager-6dbc465c8c-vj2zv                     
 sealed-secrets       sealed-secrets-controller-6f8b8b5495-6vn9j                    1/1     Running     0               8m11s
 ```
 
+### Verify managed clusters status
 ```bash
 $ kubectl get managedclusters.hmc.mirantis.com -Aw
 NAMESPACE    NAME               READY   STATUS
 hmc-system   soeren-cluster-1   True    ManagedCluster is ready
 ```
 
+### Check the created resources in AWS
 ```bash
 $ aws ec2 --region=us-east-1 describe-instances --query "Reservations[].Instances[].[InstanceId, Tags[?Key=='Name'].Value | [0]]" --filters "Name=tag:Name,Values=soeren-cluster-*" --output table
 
@@ -118,5 +135,17 @@ $ aws ec2 --region=us-east-1 describe-instances --query "Reservations[].Instance
 |  i-0f861cb16f9d6ff1c |  soeren-cluster-2-cp-0            |
 |  i-07f99b8f2f85b5925 |  soeren-cluster-1-cp-2            |
 +----------------------+-----------------------------------+
+```
 
+### Cleaning up resources
+
+Before starting to clean up the resources, flux reconciliation must be suspended, otherwise the cluster manifests be continuously re-applied.
+
+```
+# suspend kustomization of the clusters
+$ flux suspend kustomization clusters-aws
+
+# delete cluster manifests
+$ k delete managedclusters.hmc.mirantis.com -n hmc-system soeren-cluster-1
+$ k delete managedclusters.hmc.mirantis.com -n hmc-system soeren-cluster-2
 ```
