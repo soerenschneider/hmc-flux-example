@@ -4,18 +4,3 @@ kind: "Kustomization"
 resources:
   - ../../../infra/hmc-system
   - ../../../infra/flux-system
-patches:
-  - target:
-      kind: Kustomization
-      name: hmc
-    patch: |-
-      - op: replace
-        path: /spec/path
-        value: ./clusters/kind/hmc
-  - target:
-      kind: Kustomization
-      name: infra
-    patch: |-
-      - op: replace
-        path: /spec/path
-        value: ./clusters/kind/infra
