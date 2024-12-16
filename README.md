@@ -93,3 +93,29 @@ projectsveltos       shard-controller-bf6bb45cf-8zwbz                           
 projectsveltos       sveltos-agent-manager-6dbc465c8c-vj2zv                        1/1     Running     0               112s
 sealed-secrets       sealed-secrets-controller-6f8b8b5495-6vn9j                    1/1     Running     0               8m11s
 ```
+
+```bash
+$ kubectl get managedclusters.hmc.mirantis.com -Aw
+NAMESPACE    NAME               READY   STATUS
+hmc-system   soeren-cluster-1   True    ManagedCluster is ready
+```
+
+```bash
+$ aws ec2 --region=us-east-1 describe-instances --query "Reservations[].Instances[].[InstanceId, Tags[?Key=='Name'].Value | [0]]" --output table
+
+------------------------------------------------------------
+|                     DescribeInstances                    |
++----------------------+-----------------------------------+
+|  i-06eb65c769ab1ef34 |  MyLab-DND-sugesh                 |
+|  i-057cf18ab40f850fa |  soeren-cluster-1-cp-0            |
+|  i-00047d395a1849e73 |  soeren-cluster-1-md-2crx2-7x2q4  |
+|  i-0125cb216f707c5de |  soeren-cluster-1-md-2crx2-4z564  |
+|  i-0def1ec28e2388995 |  soeren-cluster-1-md-2crx2-gxfgt  |
+|  i-0fb6ce5451b2ff3fc |  kenvue-test                      |
+|  i-006522a5aed529f15 |  kenvue-test                      |
+|  i-028e5d13ca25aa0f1 |  kenvue-test                      |
+|  i-0f571da657c671ad9 |  soeren-cluster-1-cp-1            |
+|  i-07f99b8f2f85b5925 |  soeren-cluster-1-cp-2            |
++----------------------+-----------------------------------+
+
+```
