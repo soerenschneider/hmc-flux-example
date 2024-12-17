@@ -1,0 +1,16 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  labels:
+    hmc.mirantis.com/managed: "true"
+  name: k0smotron-0-0-3
+  namespace: hmc-system
+spec:
+  chart: k0smotron
+  interval: 10m0s
+  reconcileStrategy: ChartVersion
+  sourceRef:
+    kind: HelmRepository
+    name: hmc-templates
+  version: 0.0.3

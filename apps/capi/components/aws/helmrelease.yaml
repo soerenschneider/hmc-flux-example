@@ -2,8 +2,6 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  finalizers:
-  - finalizers.fluxcd.io
   labels:
     hmc.mirantis.com/managed: "true"
   name: cluster-api-provider-aws
