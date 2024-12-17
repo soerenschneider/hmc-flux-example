@@ -1,0 +1,9 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: hmc-templates
+  namespace: hmc-system
+spec:
+  interval: 5m0s
+  url: https://ghcr.io/mirantis/hmc/charts/hmc
