@@ -4,22 +4,45 @@ Install hmc using flux2
 
 ## Repo structure
 ```
-.
-├── apps                        # catalogue of "apps" installable via flux
-│   └── 2a
-│       ├── aws
-│       └── azure
+├── apps
+│   ├── capi                    # catalogue of infrastructure components installable via flux
+│   │   └── components
+│   │       ├── aws
+│   │       ├── azure
+│   │       └── vsphere
+│   ├── k0smotron
+│   ├── projectsveltos
+│   └── templates
 ├── infra                       # catalogue of infrastructure components installable via flux
 │   ├── cert-manager
 │   ├── flux-system
-│   ├── hmc-system
-│   └── sealed-secrets
-├── management-clusters         # clusters managed by flux
-│   └── kind              # local test cluster provided by "kind"
-│       ├── hmc
-│       └── infra
-└── terraform                   # create users and access keys for cloud platforms, store as kubernetes secrets
-    └── aws
+│   └── hmc-system
+├── managed-clusters            # managed clusters definitions (kustomize "bases")
+│   ├── aws                     # managedcluster resources for CAPA / AWS (kustomize "bases")
+│   └── azure                   # managedcluster resources for CAPZ / Azure (kustomize "bases")
+├── management-clusters         # management clusters definitions (kustomize "overlays") 
+│   ├── aws-2-clusters          # example resources to create two clusters on aws
+│   │   ├── credentials         # static credentials for AWS
+│   │   ├── infra               # infra components (kustomize overlays, uses resources from /infra)
+│   │   └── managed-clusters
+│   │       ├── aws-cluster-1   # cluster 1 (kustomize overlays, uses resources from /managed-clusters/aws)
+│   │       └── aws-cluster-2   # cluster 2 (kustomize overlays, uses resources from /managed-clusters/aws)
+│   ├── azure-1-cluster         # example resources to create a cluster on azure  
+│   │   ├── credentials         # static credentials for Azure
+│   │   ├── infra               # infra components (kustomize overlays, uses resources from /infra) 
+│   │   └── managed-clusters
+│   │       └── azure-cluster-1 # cluster 1 (kustomize overlays, uses resources from /managed-clusters/azure)
+│   └── kind
+│       ├── credentials
+│       ├── infra
+│       └── managed-clusters
+│           ├── aws-cluster-1
+│           └── aws-cluster-2
+└── terraform                   # contains terraform code to create necessary resources in public cloud providers 
+    ├── aws                     # ... for CAPA managed aws cluster
+    └── azure                   # ... for CAPZ managed azure clusters
+
+
 ```
 
 ### Kustomize manifests
