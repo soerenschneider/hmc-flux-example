@@ -11,33 +11,3 @@ spec:
   sourceRef:
     kind: GitRepository
     name: 2a
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: apps
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  path: management-clusters/without-hmc/managed-clusters
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: 2a
-  dependsOn:
-    - name: infra
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: credentials
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  path: management-clusters/without-hmc/credentials
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: 2a
-  dependsOn:
-    - name: infra
