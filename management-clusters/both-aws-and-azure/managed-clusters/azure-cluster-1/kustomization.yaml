@@ -7,7 +7,6 @@ resources:
 patches:
   - target:
       kind: "ManagedCluster"
-      name: "azure-cluster"
     patch: |-
       - op: replace
         path: /metadata/name
