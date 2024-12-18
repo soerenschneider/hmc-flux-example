@@ -10,7 +10,7 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/name
-        value: "soeren-cluster-1"
+        value: "soeren-cluster-aws-1"
       - op: replace
         path: /spec/credential
         value: "aws-credential-cluster-1"
