@@ -7,6 +7,7 @@ resources:
 patches:
   - target:
       kind: "ManagedCluster"
+      name: "azure-cluster"
     patch: |-
       - op: replace
         path: /metadata/name
@@ -23,5 +24,3 @@ patches:
       - op: replace
         path: /spec/config/worker/vmSize
         value: "Standard_A4_v2"
-components:
-  - ../../../../managed-clusters/generic/components/services/kyverno

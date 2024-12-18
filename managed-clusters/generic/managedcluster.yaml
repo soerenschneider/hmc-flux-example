@@ -1,0 +1,10 @@
+---
+apiVersion: hmc.mirantis.com/v1alpha1
+kind: ManagedCluster
+metadata:
+  name: managed-standalone-cluster
+spec:
+  template: ""
+  credential: ""
+  dryRun: false
+  config: {}

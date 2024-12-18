@@ -41,8 +41,6 @@ Install hmc using flux2
 └── terraform                   # contains terraform code to create necessary resources in public cloud providers 
     ├── aws                     # ... for CAPA managed aws cluster
     └── azure                   # ... for CAPZ managed azure clusters
-
-
 ```
 
 ### Kustomize manifests

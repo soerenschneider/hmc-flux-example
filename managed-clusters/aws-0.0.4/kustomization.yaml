@@ -1,0 +1,12 @@
+---
+apiVersion: "kustomize.config.k8s.io/v1beta1"
+kind: "Kustomization"
+resources:
+  - ../generic
+patches:
+  - target:
+      kind: ManagedCluster
+    patch: |-
+      - op: replace
+        path: /spec/template
+        value: "aws-standalone-cp-0-0-4"
