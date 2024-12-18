@@ -2,7 +2,7 @@
 apiVersion: hmc.mirantis.com/v1alpha1
 kind: ManagedCluster
 metadata:
-  name: soeren-cluster-aws-2
+  name: flux-demo-cluster-aws-2
 spec:
   template: aws-standalone-cp-0-0-3
   credential: aws-credential-cluster-1
