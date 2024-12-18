@@ -1,0 +1,26 @@
+---
+apiVersion: "kustomize.config.k8s.io/v1beta1"
+kind: "Kustomization"
+namespace: hmc-system
+resources:
+  - ../../../../managed-clusters/azure
+patches:
+  - target:
+      kind: "ManagedCluster"
+      name: "azure-cluster"
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: "soeren-cluster-1"
+      - op: replace
+        path: /spec/credential
+        value: "azure-credential-cluster-1"
+      - op: replace
+        path: /spec/config/location
+        value: "westus"
+      - op: replace
+        path: /spec/config/subscriptionID
+        value: "xxxx-yyyy-zzzz"
+      - op: replace
+        path: /spec/config/worker/vmSize
+        value: "Standard_A4_v2"
