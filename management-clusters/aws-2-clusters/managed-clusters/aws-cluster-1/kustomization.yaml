@@ -20,9 +20,3 @@ patches:
       - op: replace
         path: /spec/config/worker/instanceType
         value: t3.medium
-      - op: add
-        path: /spec/services
-        value:
-          - template: ingress-nginx-4-11-3
-            name: ingress-nginx
-            namespace: ingress-nginx
